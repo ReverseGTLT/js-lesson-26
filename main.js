@@ -115,6 +115,9 @@ const formMy = document.forms.myForm;
 const userInput = document.querySelector('.user-input');
 const userInputContainerBtn = document.querySelector('.user-input__container-btn');
 const table = document.querySelector("#table");
+const elements = formMy.elements;
+const [name, lastName, secondName, city, post, quantity, comment, card, cash] = elements;
+const infoArgs = [name, lastName, secondName, city, post, quantity, comment, card, cash]
 let productsByCategory;
 
 container.addEventListener("click", (e) => {
@@ -217,11 +220,8 @@ form.addEventListener('submit', (e) => {
     description.classList.add('invisible');
     buyButton.classList.add('invisible');
 
-    const elements = formMy.elements;
-    const [name, lastName, secondName, city, post, quantity, comment, card, cash] =
-        elements;
+
     console.log(elements);
-    const infoArgs = [name, lastName, secondName, city, post, quantity, comment, card, cash]
     for (const arg of infoArgs) {
         if (arg.name !== 'money') {
             const row = table.insertRow();
