@@ -106,11 +106,11 @@ const products = [
     },
 ];
 
-const container = document.querySelector(".container");
-const productsUl = document.querySelector("#products");
-const description = document.querySelector("#description");
-const buyButton = document.querySelector("#buy-button");
-const form = document.querySelector('.form');
+const container = document.querySelector(".container");//
+const productsUl = document.querySelector("#products");//
+const description = document.querySelector("#description");//
+const buyButton = document.querySelector("#buy-button");//
+const form = document.querySelector('.form');//
 const formMy = document.forms.myForm;
 const userInput = document.querySelector('.user-input');
 const userInputContainerBtn = document.querySelector('.user-input__container-btn');
@@ -119,23 +119,30 @@ const elements = formMy.elements;
 const [name, lastName, secondName, city, post, quantity, comment, card, cash] = elements;
 const infoArgs = [name, lastName, secondName, city, post, quantity, comment, card, cash]
 let productsByCategory;
+const outTitle = document.querySelector('.out-title');
+const outDescription = document.querySelector('.out-description');
 
-container.addEventListener("click", (e) => {
-    const target = e.target;
 
-    if (target.closest("#categories")) {
-        showProductList(productsByCategory, target);
+
+container.addEventListener("click", (event) => {
+    let targetInContainer = event.target;
+    let outTitleText = targetInContainer.textContent;
+
+    if (targetInContainer.closest("#categories")) {
+        showProductList(productsByCategory, targetInContainer);
         productsUl.classList.remove('invisible');
         description.classList.remove('visible');
         buyButton.classList.remove('visible');
         form.classList.add('invisible');
     }
 
-    if (target.closest("#products")) {
-        showProductInfo(target, products);
+    if (targetInContainer.closest("#products")) {
+        showProductInfo(targetInContainer, products);
         form.classList.add('invisible');
         description.classList.remove('invisible');
         buyButton.classList.remove('invisible');
+        outTitle.innerHTML = '';
+        outTitle.append(`Product: ${outTitleText}`)
     }
 });
 
@@ -173,9 +180,12 @@ function showProductList(list, target) {
 
 function showProductInfo(target, listProduct) {
     const product = listProduct.find((el) => el.name === target.innerText);
+
     description.innerText = product.description;
-    description.classList.add('visible')
-    buyButton.classList.add('visible')
+    description.classList.add('visible');
+    buyButton.classList.add('visible');
+    outDescription.innerText = '';
+    outDescription.append(`Product description: ${product.description}`);
 }
 
 function formDrop() {
