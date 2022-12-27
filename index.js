@@ -121,8 +121,7 @@ const infoArgs = [name, lastName, secondName, city, post, quantity, comment, car
 let productsByCategory;
 const outTitle = document.querySelector('.out-title');
 const outDescription = document.querySelector('.out-description');
-
-
+const formBtn = document.querySelector('.form-btn')
 
 container.addEventListener("click", (event) => {
     let targetInContainer = event.target;
@@ -194,8 +193,23 @@ function formDrop() {
     })
 }
 formDrop()
+formBtn.addEventListener('click', () => {
+    const inputField = document.querySelectorAll('.input-field');
+    inputField.forEach((item) => {
+        const validationMassage = item.nextElementSibling;
+        if (item.value === '') {
+            item.classList.add('is-invalid');
+            validationMassage.classList.add('invalid-feedback');
+            validationMassage.innerText = 'This field is required';
+        } else {
+            item.classList.remove('is-invalid');
+            validationMassage.classList.remove('invalid-feedback');
+            validationMassage.innerText = '';
+        }
+    })
+})
 
-form.onchange = ({target: input}) => {
+form.addEventListener('input', ({target: input}) => {
     const { value, required, minLength} = input;
     const validationMassage = input.nextElementSibling;
 
@@ -216,9 +230,7 @@ form.onchange = ({target: input}) => {
     validationMassage.innerText = '';
     input.classList.remove('is-invalid');
     input.classList.add('is-valid');
-
-}
-
+})
 
 form.addEventListener('submit', (e) => {
     e.preventDefault()
@@ -230,8 +242,6 @@ form.addEventListener('submit', (e) => {
     description.classList.add('invisible');
     buyButton.classList.add('invisible');
 
-
-    console.log(elements);
     for (const arg of infoArgs) {
         if (arg.name !== 'money') {
             const row = table.insertRow();
