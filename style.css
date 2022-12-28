@@ -6,7 +6,6 @@
 .form {
   width: 100vw;
   position: absolute;
-  top: 50px;
   left: 0;
   right: 0;
   background-color: white;
@@ -17,7 +16,7 @@
   border: 1px solid #bebebe;
   margin-inline: auto;
   display: flex;
-  width: 500px;
+  width: 350px;
   padding: 20px;
   flex-direction: column;
   gap: 20px;
@@ -35,16 +34,25 @@
   align-items: start;
   gap: 1rem;
   padding: 50px;
-  width: 1200px;
+  max-width: 1200px;
+}
+@media (max-width: 768px) {
+  .container {
+    flex-direction: column;
+    gap: 30px;
+    align-items: center;
+    padding: 15px;
+  }
 }
 
 ul {
   list-style-type: none;
   text-align: start;
+  padding-left: 0;
 }
 
 li {
-  padding: 0.5rem;
+  padding-block: 0.5rem;
   cursor: pointer;
   transition: 0.2s;
 }
@@ -90,6 +98,20 @@ textarea {
 .products,
 .categories {
   width: 30%;
+}
+@media (max-width: 768px) {
+  .description,
+  .products,
+  .categories {
+    text-align: center;
+    width: 100%;
+  }
+}
+
+@media (max-width: 768px) {
+  .buy-button {
+    margin-inline: auto;
+  }
 }
 
 .buy-button,
@@ -145,7 +167,7 @@ textarea {
 .user-input__container {
   margin-top: 150px;
   margin-inline: auto;
-  width: 600px;
+  max-width: 350px;
   border: 1px solid #bebebe;
   border-radius: 20px;
   text-align: center;
